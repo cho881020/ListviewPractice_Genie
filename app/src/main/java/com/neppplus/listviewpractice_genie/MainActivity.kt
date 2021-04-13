@@ -1,8 +1,10 @@
 package com.neppplus.listviewpractice_genie
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.neppplus.listviewpractice_genie.adapters.StudentAdapter
 import com.neppplus.listviewpractice_genie.datas.Student
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,9 +44,20 @@ class MainActivity : AppCompatActivity() {
 
         studentListView.setOnItemLongClickListener { parent, view, position, id ->
 
-            mStudentList.removeAt(position)
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle("학생 목록 삭제")
+            alert.setMessage("정말 해당 학생을 삭제 하시겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
 
-            mAdapter.notifyDataSetChanged()
+                mStudentList.removeAt(position)
+
+                mAdapter.notifyDataSetChanged()
+
+
+            })
+            alert.setNegativeButton("취소", null)
+            alert.show()
+
 
             return@setOnItemLongClickListener true
 
