@@ -2,6 +2,7 @@ package com.neppplus.listviewpractice_genie
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.neppplus.listviewpractice_genie.adapters.StudentAdapter
 import com.neppplus.listviewpractice_genie.datas.Student
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,6 +30,14 @@ class MainActivity : AppCompatActivity() {
 
         studentListView.adapter = mAdapter
 
+
+        studentListView.setOnItemClickListener { parent, view, position, id ->
+
+            val clickedStudent = mStudentList[position]
+
+            Toast.makeText(this, "${clickedStudent.name} 이 클릭 됨", Toast.LENGTH_SHORT).show()
+
+        }
 
 
     }
